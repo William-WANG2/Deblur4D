@@ -23,6 +23,89 @@ function element(tag, className, text) {
   return node;
 }
 
+// Magnify the displayed tiles, including the frozen inputs, at matching coordinates.
+class ComparisonMagnifier {
+  constructor(layout, drawers) {
+    this.active = false;
+    this.frame = 0;
+    this.position = {x: .5, y: .5};
+    this.pointer = matchMedia('(hover: hover) and (pointer: fine)');
+    this.items = drawers.map(({stage, ctx}) => {
+      const lens = element('div', 'comparison-lens');
+      lens.setAttribute('aria-hidden', 'true');
+      const canvas = element('canvas', 'lens-canvas');
+      canvas.width = canvas.height = 1;
+      lens.append(canvas, element('span', 'lens-power', '4×'));
+      stage.append(lens);
+      stage.addEventListener('pointerenter', event => {
+        if (!this.pointer.matches || event.pointerType !== 'mouse') return;
+        this.active = true;
+        this.measure();
+        this.items.forEach(item => item.stage.classList.add('is-magnifying'));
+        this.move(event, stage);
+      });
+      stage.addEventListener('pointermove', event => {
+        if (this.active && event.pointerType === 'mouse') this.move(event, stage);
+      });
+      stage.addEventListener('pointerleave', () => this.hide());
+      stage.addEventListener('pointercancel', () => this.hide());
+      return {stage, source: ctx.canvas, lens, canvas, ctx: canvas.getContext('2d', {alpha: false})};
+    });
+    new ResizeObserver(() => {
+      if (this.active) { this.measure(); this.draw(); }
+    }).observe(layout);
+    this.pointer.addEventListener('change', () => this.hide());
+    window.addEventListener('blur', () => this.hide());
+    window.addEventListener('keydown', event => { if (event.key === 'Escape') this.hide(); });
+  }
+  measure() {
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    for (const item of this.items) {
+      const bounds = item.stage.getBoundingClientRect();
+      item.width = bounds.width;
+      item.height = bounds.height;
+      item.size = Math.max(1, Math.min(148, bounds.width * .46, bounds.height - 8));
+      item.lens.style.width = `${item.size}px`;
+      const pixels = Math.max(1, Math.round(item.size * dpr));
+      if (item.canvas.width !== pixels) item.canvas.width = item.canvas.height = pixels;
+    }
+  }
+  move(event, stage) {
+    const rect = stage.getBoundingClientRect();
+    this.position = {
+      x: Math.max(0, Math.min(1, (event.clientX - rect.left) / rect.width)),
+      y: Math.max(0, Math.min(1, (event.clientY - rect.top) / rect.height)),
+    };
+    if (!this.frame) this.frame = requestAnimationFrame(() => this.draw());
+  }
+  draw() {
+    cancelAnimationFrame(this.frame);
+    this.frame = 0;
+    if (!this.active) return;
+    for (const item of this.items) {
+      const {source, lens, canvas, ctx, width, height, size} = item;
+      if (!width || !height) continue;
+      // Preserve the full 2:1 image coordinates; never sample an adjacent atlas tile.
+      const cropWidth = size / 4 * source.width / width;
+      const cropHeight = size / 4 * source.height / height;
+      const x = Math.max(0, Math.min(source.width - cropWidth, this.position.x * source.width - cropWidth / 2));
+      const y = Math.max(0, Math.min(source.height - cropHeight, this.position.y * source.height - cropHeight / 2));
+      const left = Math.max(2, Math.min(width - size - 2, this.position.x * width - size / 2));
+      const top = Math.max(2, Math.min(height - size - 2, this.position.y * height - size / 2));
+      lens.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(source, x, y, cropWidth, cropHeight, 0, 0, canvas.width, canvas.height);
+    }
+  }
+  hide() {
+    this.active = false;
+    cancelAnimationFrame(this.frame);
+    this.frame = 0;
+    this.items.forEach(item => item.stage.classList.remove('is-magnifying'));
+  }
+}
+
 class ScenePlayer {
   constructor(scene, index, list) {
     this.scene = scene;
@@ -74,15 +157,18 @@ class ScenePlayer {
         canvas.setAttribute('role', 'img');
         canvas.setAttribute('aria-label', `${scene.title}: ${LABELS[key].join(' ')}`);
         canvas.dataset.view = key;
-        tile.append(caption, canvas);
+        const stage = element('div', 'comparison-media');
+        stage.append(canvas);
+        tile.append(caption, stage);
         group.append(tile);
         const tileIndex = scene.tileOrder.indexOf(key);
-        this.drawers.push({ctx: canvas.getContext('2d', {alpha: false}), sensor,
+        this.drawers.push({stage, ctx: canvas.getContext('2d', {alpha: false}), sensor,
           x: (tileIndex % 4) * scene.tileWidth, y: Math.floor(tileIndex / 4) * scene.tileHeight});
       });
       layout.append(group);
     }
     root.append(layout);
+    this.magnifier = new ComparisonMagnifier(layout, this.drawers);
     const controls = element('div', 'player-controls');
     const transport = element('div', 'transport');
     const makeButton = (icon, label, className = '') => {
@@ -178,6 +264,7 @@ class ScenePlayer {
       ctx.drawImage(hold && sensor ? this.poster : source, x, y, w, h, 0, 0, w, h);
     }
     this.inputsHeld = hold;
+    this.magnifier.draw();
   }
   render() {
     if (this.video.readyState < 2) return;
@@ -254,6 +341,7 @@ class ScenePlayer {
   setStatus(text) { this.status.textContent = text; this.status.hidden = !text; }
   setVisible(visible) {
     this.visible = visible;
+    if (!visible || document.hidden) this.magnifier.hide();
     if (visible && !document.hidden && this.wantPlaying) this.play();
     else this.video.pause();
   }

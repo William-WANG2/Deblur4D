@@ -480,12 +480,73 @@ nav a:hover {
   box-shadow:inset 0 0 0 1px #5577ad;
 }
 
-.view-tile canvas {
+.view-tile canvas[data-view] {
   width:100%;
   height:auto;
   display:block;
   aspect-ratio:2/1;
   background:#101c27;
+}
+
+.comparison-media {
+  position:relative;
+  overflow:hidden;
+}
+
+.comparison-lens {
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:2;
+  aspect-ratio:1;
+  border-radius:50%;
+  overflow:hidden;
+  pointer-events:none;
+  visibility:hidden;
+  background:#101c27;
+  box-shadow:0 5px 20px #0008;
+}
+
+.comparison-lens::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  border:2px solid #eff6ff;
+  border-radius:50%;
+}
+
+.comparison-lens .lens-canvas {
+  display:block;
+  width:100%;
+  height:100%;
+  aspect-ratio:1;
+}
+
+.lens-power {
+  position:absolute;
+  bottom:6px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:0 6px;
+  border-radius:8px;
+  background:#101c27c9;
+  color:white;
+  font-size:10px;
+  line-height:18px;
+  font-weight:600;
+}
+
+.zoom-hint {
+  display:none;
+  margin:-9px 0 20px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+@media (hover:hover) and (pointer:fine) {
+  .comparison-media {cursor:crosshair;}
+  .is-magnifying .comparison-lens {visibility:visible;}
+  .zoom-hint {display:block;}
 }
 
 .view-name .frozen {

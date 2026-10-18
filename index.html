@@ -7,9 +7,9 @@
   <meta name="color-scheme" content="light">
   <title>Deblur4D · From Blurry Frames to Dynamic 3D</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=motion-depth">
+  <link rel="stylesheet" href="styles.css?v=hover-magnifier-1">
   <link rel="stylesheet" href="method.css?v=1">
-  <script src="player.js?v=alternating-two-orbits-2" defer></script>
+  <script src="player.js?v=hover-magnifier-1" defer></script>
   <script src="outputs.js?v=1" defer></script>
   <script src="method.js?v=1" defer></script>
 </head>
@@ -50,6 +50,7 @@
         <p class="section-intro">Each scene alternates two passes: one with two smooth camera orbits in 2.08 seconds at the midpoint, followed by one uninterrupted pass. RGB, TD, and SD stay frozen during the orbit.</p>
         <a class="outputs-jump" href="#geometry">Explore our motion &amp; depth predictions <span aria-hidden="true">↓</span></a>
         <div class="gallery-legend"><span><i class="legend-dot input-dot"></i>Sensor inputs + our reconstruction</span><span><i class="legend-dot baseline-dot"></i>Four comparison methods</span></div>
+        <p class="zoom-hint">Hover over any image for a synchronized 4× magnifier across all eight views. Move away or press Esc to dismiss.</p>
         <div id="scene-list" class="scene-list" aria-label="Real-world scene comparisons"><p class="loading-message" role="status">Loading real-world scenes…</p></div>
         <noscript>Enable JavaScript to use the synchronized eight-view players.</noscript>
         <p class="gallery-note">All clips retain the original 12 FPS presentation cadence. The camera orbit holds scene time fixed at the midpoint.</p>
