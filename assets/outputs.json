@@ -1,0 +1,58 @@
+[
+  {
+    "id": "fabric-motion_time0",
+    "title": "Waving fabric",
+    "kind": "motion_time0",
+    "fps": 12,
+    "frameCount": 13,
+    "width": 640,
+    "height": 320,
+    "mp4Codec": "avc1.640016",
+    "mediaVersion": "4d244a8584fe",
+    "video": "assets/media/outputs/fabric-motion_time0.mp4",
+    "webm": "assets/media/outputs/fabric-motion_time0.webm",
+    "poster": "assets/media/outputs/fabric-motion_time0.webp"
+  },
+  {
+    "id": "cushion-motion_time0",
+    "title": "Moving cushion",
+    "kind": "motion_time0",
+    "fps": 12,
+    "frameCount": 13,
+    "width": 640,
+    "height": 320,
+    "mp4Codec": "avc1.640016",
+    "mediaVersion": "917a3f65037c",
+    "video": "assets/media/outputs/cushion-motion_time0.mp4",
+    "webm": "assets/media/outputs/cushion-motion_time0.webm",
+    "poster": "assets/media/outputs/cushion-motion_time0.webp"
+  },
+  {
+    "id": "pinwheel-depth",
+    "title": "Spinning pinwheel",
+    "kind": "depth",
+    "fps": 12,
+    "frameCount": 13,
+    "width": 640,
+    "height": 320,
+    "mp4Codec": "avc1.640016",
+    "mediaVersion": "c1021fa67d1d",
+    "video": "assets/media/outputs/pinwheel-depth.mp4",
+    "webm": "assets/media/outputs/pinwheel-depth.webm",
+    "poster": "assets/media/outputs/pinwheel-depth.webp"
+  },
+  {
+    "id": "spinning-disc-depth",
+    "title": "Spinning disc",
+    "kind": "depth",
+    "fps": 12,
+    "frameCount": 13,
+    "width": 640,
+    "height": 320,
+    "mp4Codec": "avc1.640016",
+    "mediaVersion": "3d85c4da2dc0",
+    "video": "assets/media/outputs/spinning-disc-depth.mp4",
+    "webm": "assets/media/outputs/spinning-disc-depth.webm",
+    "poster": "assets/media/outputs/spinning-disc-depth.webp"
+  }
+]

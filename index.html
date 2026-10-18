@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Deblur4D reconstructs sharp dynamic 3D Gaussians from blurry RGB frames and complementary spatial and temporal measurements. Explore nine real-world scenes and five-method comparisons.">
+  <meta name="color-scheme" content="light">
+  <title>Deblur4D · From Blurry Frames to Dynamic 3D</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css?v=motion-depth">
+  <link rel="stylesheet" href="method.css?v=1">
+  <script src="player.js?v=alternating-two-orbits-2" defer></script>
+  <script src="outputs.js?v=1" defer></script>
+  <script src="method.js?v=1" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#main" aria-label="Deblur4D home"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="m15 2 12 7v12l-12 7-12-7V9Z M3 9l12 7 12-7 M15 16v12"/></svg>Deblur4D</a>
+      <nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#results">Results</a><a href="#method">Method</a></nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="container hero" aria-labelledby="project-title">
+      <p class="eyebrow">Complementary vision · Dynamic 3D reconstruction</p>
+      <h1 id="project-title"><span>Deblur4D</span><br>Feed-Forward 4D Reconstruction from<br class="desktop-break"> Blurry RGB and Complementary Vision</h1>
+      <p class="hero-summary">From two blurry frames to a sharp, dynamic 3D scene.<br>Recovering camera poses, depth, and scene motion with synchronized RGB, TD, and SD measurements.</p>
+      <div class="actions"><a class="button primary" href="#results">Explore results <span aria-hidden="true">→</span></a><a class="button" href="#method">How it works <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section class="container section overview" id="overview" aria-labelledby="overview-title">
+      <h2 id="overview-title">From blur to 4D.</h2>
+      <figure class="teaser">
+        <a href="assets/figures/teaser.webp" target="_blank" rel="noopener" aria-label="Open the overview figure at full resolution"><img src="assets/figures/teaser.webp" width="2200" height="597" alt="Blurry RGB, spatial differences, and temporal differences are transformed into dynamic Gaussians, sharp images, depth, and 3D scene motion."></a>
+        <figcaption>Two RGB exposures. High-speed differential measurements. One dynamic 3D reconstruction.</figcaption>
+      </figure>
+      <p class="overview-description">Motion blur and large inter-frame displacements make high-speed 4D reconstruction challenging. Deblur4D combines standard RGB frames with hardware-synchronized spatial differences (SD) and temporal differences (TD) from a Complementary Vision Sensor. A single feed-forward framework jointly recovers sharp appearance, camera poses, depth, and continuous scene motion.</p>
+      <div class="contributions">
+        <div><span class="number">01</span><div><h3>Resolve exposure blur</h3><p>Intra-exposure TD and SD guide the recovery of blur-robust endpoint features.</p></div></div>
+        <div><span class="number">02</span><div><h3>Recover motion in between</h3><p>High-rate SD queries the endpoint features to reconstruct intermediate moments.</p></div></div>
+        <div><span class="number">03</span><div><h3>Explore the scene in 3D</h3><p>Dynamic Gaussians enable sharp rendering across both time and viewpoint.</p></div></div>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="results" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow">Captured with a Complementary Vision Sensor</p><h2 id="results-title">Real-world results.</h2></div><span class="section-count">9 scenes <span aria-hidden="true">/</span> 5 methods</span></div>
+        <p class="section-intro">Each scene alternates two passes: one with two smooth camera orbits in 2.08 seconds at the midpoint, followed by one uninterrupted pass. RGB, TD, and SD stay frozen during the orbit.</p>
+        <a class="outputs-jump" href="#geometry">Explore our motion &amp; depth predictions <span aria-hidden="true">↓</span></a>
+        <div class="gallery-legend"><span><i class="legend-dot input-dot"></i>Sensor inputs + our reconstruction</span><span><i class="legend-dot baseline-dot"></i>Four comparison methods</span></div>
+        <div id="scene-list" class="scene-list" aria-label="Real-world scene comparisons"><p class="loading-message" role="status">Loading real-world scenes…</p></div>
+        <noscript>Enable JavaScript to use the synchronized eight-view players.</noscript>
+        <p class="gallery-note">All clips retain the original 12 FPS presentation cadence. The camera orbit holds scene time fixed at the midpoint.</p>
+      </div>
+    </section>
+
+    <section class="container section outputs-section" id="geometry" aria-labelledby="outputs-title">
+      <div class="section-heading"><div><p class="eyebrow">Beyond sharp appearance · Ours</p><h2 id="outputs-title">Motion and depth, recovered.</h2></div><span class="section-count">4 real captures</span></div>
+      <p class="section-intro">Scene motion from waving fabric and a moving cushion. Depth from a spinning pinwheel and disc. All four clips show Deblur4D predictions at their original playback speed.</p>
+      <div id="output-galleries"><p class="loading-message" role="status">Loading motion and depth…</p></div>
+      <noscript>Enable JavaScript to view the motion and depth players.</noscript>
+    </section>
+
+    <section class="container section method-section" id="method" aria-labelledby="method-title">
+      <div class="section-heading"><div><p class="eyebrow">The reconstruction framework</p><h2 id="method-title">Complementary signals, unified geometry.</h2></div></div>
+      <p class="section-intro">First deblur the endpoint representations; then interpolate temporally dense visual tokens. A foundation aggregator decodes cameras, depth, Gaussian attributes, and scene flow into a consistent 4D representation.</p>
+      <div class="method-tour" id="method-tour" data-stage="0" aria-label="Interactive three-stage Deblur4D walkthrough">
+        <div class="tour-heading">
+          <div><p class="tour-eyebrow">Inside a single feed-forward pass</p><h3>Two blurry frames.<br><span>An entire moving world.</span></h3></div>
+          <div class="tour-live"><span></span><span id="tour-state">Animated walkthrough</span></div>
+        </div>
+        <div class="tour-stages" role="tablist" aria-label="Reconstruction stages">
+          <button type="button" role="tab" id="tour-tab-0" aria-controls="tour-panel" aria-selected="true" data-tour-stage="0"><span class="tour-step">01</span><span><strong>Deblur endpoints</strong><small>RGB + exposure TD &amp; SD</small></span><i></i></button>
+          <button type="button" role="tab" id="tour-tab-1" aria-controls="tour-panel" aria-selected="false" tabindex="-1" data-tour-stage="1"><span class="tour-step">02</span><span><strong>Interpolate tokens</strong><small>Endpoint memory + high-rate SD</small></span><i></i></button>
+          <button type="button" role="tab" id="tour-tab-2" aria-controls="tour-panel" aria-selected="false" tabindex="-1" data-tour-stage="2"><span class="tour-step">03</span><span><strong>Reconstruct everything</strong><small>Dense tokens + time</small></span><i></i></button>
+        </div>
+        <div class="tour-panel" id="tour-panel" role="tabpanel" aria-labelledby="tour-tab-0">
+          <aside class="tour-inputs">
+            <p class="tour-kicker" id="tour-input-heading">The inputs · exposure windows</p>
+            <h4 id="tour-title">Correct appearance before filling time.</h4>
+            <p class="tour-description" id="tour-description">RGB tokens attend to synchronized exposure measurements, recovering two blur-robust endpoint representations.</p>
+            <div id="tour-input-cards"></div>
+            <div class="tour-output"><span>What this stage produces</span><strong id="tour-output-text">Two blur-robust endpoint features</strong></div>
+          </aside>
+          <div class="tour-visual">
+            <div class="tour-visual-top"><span id="tour-visual-title">Exposure-guided cross-attention</span><span class="tour-visual-index" id="tour-visual-index">01 / 03</span></div>
+            <div class="tour-canvas-wrap">
+              <canvas id="method-canvas" role="img" aria-label="Animated endpoint feature correction: RGB queries exposure-time TD and exposure-center SD." tabindex="0"></canvas>
+              <div class="tour-annotations" id="tour-annotations" aria-hidden="true"></div>
+              <span class="tour-drag-hint" hidden>Drag to orbit · arrow keys to rotate</span>
+            </div>
+            <div class="tour-visual-bottom" id="tour-visual-caption">RGB supplies appearance. Exposure-time differences resolve blur.</div>
+            <div class="tour-heads" id="tour-heads" hidden role="group" aria-label="Inspect reconstruction outputs">
+              <button type="button" data-output="camera" aria-pressed="false"><span>⌖</span><strong>Cameras</strong><small>K · E</small></button>
+              <button type="button" data-output="depth" aria-pressed="false"><span>▱</span><strong>Depth</strong><small>Dₙ</small></button>
+              <button type="button" data-output="gaussian" aria-pressed="true"><span>✧</span><strong>Gaussians</strong><small>μ · s · q · α · c</small></button>
+              <button type="button" data-output="motion" aria-pressed="false"><span>↝</span><strong>Scene flow</strong><small>Δμ(t) · Δα(t)</small></button>
+            </div>
+          </div>
+        </div>
+        <div class="tour-shortcut"><span class="shortcut-signal">SD</span><span>High-rate structure</span><span class="shortcut-track" aria-hidden="true"><i></i></span><span>Bidirectional ConvGRU</span><span class="shortcut-track" aria-hidden="true"><i></i></span><span>Fine Gaussian appearance</span><span class="shortcut-badge">Detail shortcut</span></div>
+        <div class="tour-controls">
+          <button type="button" id="tour-play" aria-label="Pause method walkthrough">Ⅱ <span>Pause</span></button>
+          <button type="button" id="tour-replay" aria-label="Replay method walkthrough">↺</button>
+          <input id="tour-seek" type="range" min="0" max="23999" step="1" value="0" aria-label="Explore the three-stage method animation">
+          <span class="tour-time" id="tour-time">01 / 03</span>
+        </div>
+        <p class="tour-footnote">Real sensor inputs and model predictions. Tokens and camera glyphs are schematic; the 3D point preview uses predicted depth and world-space scene flow.</p>
+      </div>
+      <details class="original-method"><summary>View the complete architecture diagram <span>↗</span></summary><figure class="method-figure"><a href="assets/figures/pipeline.webp" target="_blank" rel="noopener" aria-label="Open the complete architecture diagram"><img src="assets/figures/pipeline.webp" width="2200" height="857" alt="Full Deblur4D architecture, including exposure-guided endpoint correction, SD-guided temporal queries, reconstruction heads, and the appearance shortcut." loading="lazy"></a></figure></details>
+      <div class="training-note"><span class="number">Learning beyond labeled 3D data</span><p>Training combines 3D-annotated datasets with unlabeled video, using foundation-model pseudo-labels and differentiable rendering to improve generalization to real captures.</p></div>
+    </section>
+  </main>
+  <footer><div class="container footer-inner"><span class="footer-brand">Deblur4D <span>Complementary vision for dynamic 3D.</span></span><span>Page design inspired by <a href="https://cogenrec.github.io/" target="_blank" rel="noopener">CoGenRec ↗</a></span></div></footer>
+</body>
+</html>
