@@ -12,8 +12,8 @@
       const states = [];
       root.replaceChildren();
       for (const [kind, heading, description] of [
-        ['motion_time0', 'Scene motion', 'Displacements toward t₀ across source frames. Red, green, and blue encode the normalized X, Y, and Z components.'],
-        ['depth', 'Scene depth', 'Dense geometry across the captured sequence, shown with the original depth color mapping.'],
+        ['motion_time0', 'Motion', 'Displacements toward t₀ across source frames. Red, green, and blue encode the normalized X, Y, and Z components.'],
+        ['depth', 'Depth', 'Dense geometry across the captured sequence, shown with the original depth color mapping.'],
       ]) {
         const group = document.createElement('div');
         group.className = `output-group ${kind}`;
@@ -25,11 +25,11 @@
           const card = document.createElement('figure'); card.className = 'output-card'; card.dataset.outputId = clip.id;
           const caption = document.createElement('figcaption');
           const title = document.createElement('h4'); title.textContent = clip.title;
-          const label = document.createElement('span'); label.textContent = kind === 'motion_time0' ? 'Ours · motion_time0' : 'Ours · depth';
+          const label = document.createElement('span'); label.textContent = heading;
           caption.append(title, label);
           const headings = document.createElement('div'); headings.className = 'output-pair-labels';
           const inputLabel = document.createElement('span'); inputLabel.textContent = 'Input · RGB → SD → RGB';
-          const resultLabel = document.createElement('span'); resultLabel.textContent = kind === 'motion_time0' ? 'Ours · Scene motion' : 'Ours · Scene depth';
+          const resultLabel = document.createElement('span'); resultLabel.textContent = heading;
           headings.append(inputLabel, resultLabel);
           const video = document.createElement('video');
           video.muted = true; video.loop = true; video.playsInline = true;
