@@ -18,7 +18,7 @@
       "RGB + Exposure TD/SD + Inter-frame SD"
     ],
     "mp4Codec": "avc1.640028",
-    "mediaVersion": "1ff6acf5fcb2",
+    "mediaVersion": "5324ca3b7d25",
     "video": "assets/media/studies/minion-sensor.mp4",
     "webm": "assets/media/studies/minion-sensor.webm",
     "poster": "assets/media/studies/minion-sensor.webp"
@@ -55,11 +55,11 @@
     "tileWidth": 640,
     "tileHeight": 320,
     "panels": [
-      "Rendered view",
+      "Input \u00b7 RGB \u2192 SD \u2192 RGB",
       "Point tracks"
     ],
     "mp4Codec": "avc1.640016",
-    "mediaVersion": "d0c984260b54",
+    "mediaVersion": "ce382929187a",
     "video": "assets/media/studies/spinning-disc-tracks.mp4",
     "webm": "assets/media/studies/spinning-disc-tracks.webm",
     "poster": "assets/media/studies/spinning-disc-tracks.webp"
@@ -96,11 +96,11 @@
     "tileWidth": 640,
     "tileHeight": 320,
     "panels": [
-      "Rendered view",
+      "Input \u00b7 RGB \u2192 SD \u2192 RGB",
       "Point tracks"
     ],
     "mp4Codec": "avc1.640016",
-    "mediaVersion": "762aba19b708",
+    "mediaVersion": "9d2f60b59211",
     "video": "assets/media/studies/pinwheel-tracks.mp4",
     "webm": "assets/media/studies/pinwheel-tracks.webm",
     "poster": "assets/media/studies/pinwheel-tracks.webp"

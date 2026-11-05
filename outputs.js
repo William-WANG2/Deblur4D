@@ -37,7 +37,7 @@
           headings.append(inputLabel, resultLabel);
           const video = document.createElement('video');
           video.muted = true; video.loop = true; video.playsInline = true;
-          video.preload = 'none'; video.poster = clip.poster;
+          video.preload = 'none'; video.poster = `${clip.poster}?v=${clip.mediaVersion}`;
           video.width = clip.width; video.height = clip.height;
           video.setAttribute('aria-label', `${clip.title}: ${clip.panels ? clip.panels.join(', ') : 'synchronized RGB to SD to RGB inputs and motion prediction'}`);
           let drawPanels = () => {};
@@ -66,7 +66,7 @@
               index * clip.tileWidth, 0, clip.tileWidth, clip.tileHeight, 0, 0, clip.tileWidth, clip.tileHeight));
             drawPanels = () => {if (video.readyState >= 2) draw(video);};
             const poster = new Image();
-            poster.onload = () => {if (video.readyState < 2) draw(poster);}; poster.src = clip.poster;
+            poster.onload = () => {if (video.readyState < 2) draw(poster);}; poster.src = `${clip.poster}?v=${clip.mediaVersion}`;
           }
           for (const [url, type] of [[clip.video, `video/mp4; codecs="${clip.mp4Codec}"`], [clip.webm, 'video/webm; codecs="vp9"']]) {
             const source = document.createElement('source'); source.src = `${url}?v=${clip.mediaVersion}`; source.type = type; video.append(source);
