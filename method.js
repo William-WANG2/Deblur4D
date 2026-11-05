@@ -15,10 +15,10 @@
   const miniTokens = () => '<div class="token-mini" aria-hidden="true">'+Array.from({length:11},()=>'<i></i>').join('')+'</div>';
   const stages = [
     {
-      kicker:'The inputs · exposure windows', title:'Correct appearance before filling time.',
-      description:'RGB tokens query synchronized exposure tokens. Intra-exposure TD and exposure-center SD resolve blur while preserving the RGB appearance prior.',
+      kicker:'The inputs · exposure windows', title:'Deblur the endpoints.',
+      description:'Exposure TD and SD deblur the RGB endpoint features.',
       output:'Two blur-robust endpoint features · r̃₀, r̃₁', visual:'Exposure-guided cross-attention',
-      caption:'Deblurring happens in feature space. These endpoints become the shared appearance memory.',
+      caption:'Recover sharp endpoint features.',
       aria:'RGB query tokens attend to exposure-time TD and exposure-center SD tokens, producing two blur-robust endpoint features.',
       inputs: () => card('Two blurry exposures','RGB',`<div class="signal-images"><img src="${asset('rgb0')}" alt="Real blurry RGB endpoint at t0"><img src="${asset('rgb1')}" alt="Real blurry RGB endpoint at t1"></div>`)
         +card('Within each exposure','TD',`<div class="signal-images">${sprite('td0',10,'Temporal differences within the first exposure')}${sprite('td1',10,'Temporal differences within the second exposure')}</div>`,'td')
@@ -26,23 +26,23 @@
       pins:[['RGB tokens · Q',17,12,'blue'],['Exposure tokens · K, V',17,83,'amber'],['Cross-attention',49,74,'violet'],['r̃₀',82,13,'mint'],['r̃₁',82,83,'violet']],
     },
     {
-      kicker:'The inputs · between exposures', title:'Recover the moments you never captured in RGB.',
-      description:'Each high-rate SD measurement queries the two corrected endpoints. Structure comes from the target timestamp; appearance comes from both ends.',
+      kicker:'The inputs · between exposures', title:'Fill the moments in between.',
+      description:'High-rate SD fills the moments between corrected endpoints.',
       output:'Time-specific visual tokens · z̃₀ … z̃ₙ … z̃ₙ₋₁', visual:'SD-guided temporal querying',
-      caption:'SD supplies queries. The shared endpoint memory supplies keys and values at every timestamp.',
+      caption:'Interpolate intermediate visual tokens.',
       aria:'High-rate spatial differences query both endpoint features to fill a dense sequence of time-specific visual tokens.',
       inputs: () => card('Corrected endpoint memory','K, V','<div class="tour-memory"><div><b>r̃₀ + τ₀</b>Past endpoint</div><div><b>r̃₁ + τ₁</b>Future endpoint</div></div>','memory')
         +card('Structure at every instant','SD',`<div class="signal-images">${sprite('sd-sequence',13,'Real high-rate spatial difference sequence')}</div>`,'sd')
-        +card('Shared appearance, distinct times','Q','<p class="signal-copy">SD tokens query both endpoints. Learned roles τ₀ and τ₁ distinguish past from future.</p>','memory'),
+        +card('Shared appearance, distinct times','Q','<p class="signal-copy">SD queries the endpoint memory.</p>','memory'),
       pins:[['Endpoint appearance memory · K, V',50,13,'violet'],['t₀',10,46,'blue'],['t₁',91,46,'violet'],['High-rate SD · Q',50,90,'mint']],
     },
     {
       kicker:'The inputs · geometry and time', title:'Decode the whole scene, together.',
-      description:'A foundation aggregator fuses the dense visual tokens and source timestamps. Four prediction heads recover geometry, appearance, and time-conditioned motion.',
+      description:'Dense tokens and time jointly recover geometry, appearance, and motion.',
       output:'Dynamic 4D Gaussians · sharp views across time', visual:'Joint 4D reconstruction',
-      caption:'Sampled points from predicted depth and native world-space scene flow. Choose an output to inspect.',
+      caption:'Explore the reconstructed scene.',
       aria:'A real predicted depth point cloud animated with predicted world-space scene flow. Drag or use arrow keys to rotate.',
-      inputs: () => card('Dense visual tokens','z̃ₙ',miniTokens()+'<p class="signal-copy">+ sinusoidal source-time encoding</p>','memory')
+      inputs: () => card('Dense visual tokens','z̃ₙ',miniTokens()+'<p class="signal-copy">+ source time</p>','memory')
         +card('Query time for motion','t','<label class="signal-time-control"><span>t₀</span><input id="method-query-time" type="range" min="0" max="1" step="0.01" value="0.5" aria-label="Query scene time"><span>t₁</span><output id="method-query-label">t = 0.50</output></label>','sd')
         +card('Rendered appearance','RGB',`<div class="signal-images">${sprite('sharp',13,'Native sharp RGB rendering at the selected time')}${sprite('depth',13,'Predicted depth at the selected time')}</div><p class="signal-copy">Sharp RGB · predicted depth</p>`),
       pins:[['Foundation aggregator',50,7,'mint']],

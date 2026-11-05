@@ -360,6 +360,9 @@ async function init() {
       for (const entry of entries) byCard.get(entry.target).setVisible(entry.isIntersecting);
     }, {threshold: 0.15});
     players.forEach(p => observer.observe(p.card));
+    document.addEventListener('sectionvisibilitychange', event => {
+      if (!event.detail.open) players.filter(p => event.detail.content.contains(p.card)).forEach(p => p.setVisible(false));
+    });
     document.addEventListener('visibilitychange', () => players.forEach(p => p.setVisible(p.visible)));
     document.addEventListener('fullscreenchange', () => {
       for (const player of players) {

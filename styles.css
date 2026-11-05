@@ -486,6 +486,14 @@ nav a:hover {
 .study-card .output-pair-labels {display:none;}
 .study-panels {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;background:#40536c;}
 .study-panels-3 {grid-template-columns:repeat(3,minmax(0,1fr));}
+.study-panels-6 {grid-template-columns:repeat(6,minmax(170px,1fr));overflow-x:auto;}
+.study-panels-6 .study-panel-label {min-height:78px;font-size:12px;}
+.section-toggle {display:inline-flex;align-items:center;gap:30px;margin:12px 0 8px;padding:12px 20px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--blue);font:inherit;font-weight:600;cursor:pointer;}
+.section-toggle:hover {background:#eef3ff;border-color:var(--blue);}
+.section-toggle:focus-visible {outline:3px solid var(--blue);outline-offset:3px;}
+.section-toggle span {font-size:20px;line-height:1;}
+.section-content {margin-top:24px;}
+.section-content[hidden] {display:none!important;}
 .study-panel {min-width:0;background:#101c27;}
 .study-panel-label {padding:10px 12px;min-height:52px;display:flex;align-items:center;color:#e7edf5;background:#1a2a3b;font-size:14px;line-height:1.4;}
 .study-panel:last-child .study-panel-label {background:#233b60;color:#c8d9ff;}

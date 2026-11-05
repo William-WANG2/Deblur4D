@@ -5,18 +5,20 @@
     "kind": "sensor",
     "fps": 12,
     "frameCount": 13,
-    "width": 2560,
+    "width": 3840,
     "height": 320,
     "tileWidth": 640,
     "tileHeight": 320,
     "panels": [
-      "Input \u00b7 Blurry RGB",
+      "RGB",
+      "TD",
+      "SD",
       "RGB only",
       "RGB + Exposure TD/SD",
       "RGB + Exposure TD/SD + Inter-frame SD"
     ],
-    "mp4Codec": "avc1.64001f",
-    "mediaVersion": "0d177dfa730c",
+    "mp4Codec": "avc1.640028",
+    "mediaVersion": "1ff6acf5fcb2",
     "video": "assets/media/studies/minion-sensor.mp4",
     "webm": "assets/media/studies/minion-sensor.webm",
     "poster": "assets/media/studies/minion-sensor.webp"
@@ -54,10 +56,10 @@
     "tileHeight": 320,
     "panels": [
       "Rendered view",
-      "Predicted point tracks"
+      "Point tracks"
     ],
     "mp4Codec": "avc1.640016",
-    "mediaVersion": "adefad10e700",
+    "mediaVersion": "d0c984260b54",
     "video": "assets/media/studies/spinning-disc-tracks.mp4",
     "webm": "assets/media/studies/spinning-disc-tracks.webm",
     "poster": "assets/media/studies/spinning-disc-tracks.webp"
@@ -95,10 +97,10 @@
     "tileHeight": 320,
     "panels": [
       "Rendered view",
-      "Predicted point tracks"
+      "Point tracks"
     ],
     "mp4Codec": "avc1.640016",
-    "mediaVersion": "fb648e4c7085",
+    "mediaVersion": "762aba19b708",
     "video": "assets/media/studies/pinwheel-tracks.mp4",
     "webm": "assets/media/studies/pinwheel-tracks.webm",
     "poster": "assets/media/studies/pinwheel-tracks.webp"

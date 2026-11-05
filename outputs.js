@@ -14,10 +14,10 @@
       const ablationRoot = document.querySelector('#ablation-galleries');
       ablationRoot.replaceChildren();
       for (const [kind, heading, description, destination] of [
-        ['sensor', '01 · CVS sensor measurements', 'Four cases from Figure 4, shown on Swinging Minion: blurry input, RGB-only reconstruction, exposure measurements, and the addition of inter-frame SD. Reconstruction variants use labeled-only training.', ablationRoot],
-        ['training', '02 · Learning from unlabeled captures', 'Depth with labeled-only training versus training with additional unlabeled captures, alongside synchronized RGB → SD → RGB inputs. Original colors show relative depth within each prediction, not a shared metric depth scale.', ablationRoot],
-        ['motion_time0', 'Motion', 'Displacements toward t₀ across source frames. Red, green, and blue encode the normalized X, Y, and Z components.', root],
-        ['tracks', 'Point tracks', 'Predicted 3D motion projected into each rendered view. Colors identify the same points over time; short trails show their recent paths.', root],
+        ['sensor', '01 · CVS sensor measurements', 'Complementary signals improve reconstruction.', ablationRoot],
+        ['training', '02 · Learning from unlabeled captures', 'Unlabeled training improves relative depth.', ablationRoot],
+        ['motion_time0', 'Motion', '3D motion toward the first frame.', root],
+        ['tracks', 'Point tracks', 'Point trajectories on rendered frames.', root],
       ]) {
         const group = document.createElement('div');
         group.className = `output-group ${kind}`;
@@ -49,6 +49,11 @@
             video.tabIndex = -1; video.setAttribute('aria-hidden', 'true');
             headings.hidden = true;
             panelLayout = document.createElement('div'); panelLayout.className = `study-panels study-panels-${clip.panels.length}`;
+            if (clip.panels.length === 6) {
+              panelLayout.tabIndex = 0;
+              panelLayout.setAttribute('role', 'group');
+              panelLayout.setAttribute('aria-label', 'Sensor ablation panels; scroll horizontally on narrow screens');
+            }
             const canvases = clip.panels.map((name, index) => {
               const panel = document.createElement('div'); panel.className = 'study-panel';
               const title = document.createElement('div'); title.className = 'study-panel-label'; title.textContent = name;
@@ -123,6 +128,9 @@
         for (const entry of entries) {const state = byCard.get(entry.target); state.visible = entry.isIntersecting; resume(state);}
       }, {threshold: .15});
       states.forEach(state => observer.observe(state.card));
+      document.addEventListener('sectionvisibilitychange', event => {
+        if (!event.detail.open) states.filter(state => event.detail.content.contains(state.card)).forEach(state => {state.visible = false; resume(state);});
+      });
       document.addEventListener('visibilitychange', () => states.forEach(resume));
       reduced.addEventListener('change', event => {if (event.matches) states.forEach(state => {state.wanted = false; state.video.pause();});});
     } catch {
