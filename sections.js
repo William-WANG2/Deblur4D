@@ -1,11 +1,11 @@
 /* Results stay collapsed until the viewer opens a section. */
 (() => {
   'use strict';
-  const buttons = [...document.querySelectorAll('.section-toggle')];
+  const buttons = [...document.querySelectorAll('.section-toggle, .disclosure-toggle')];
   function setOpen(button, open) {
     const content = document.getElementById(button.getAttribute('aria-controls'));
     button.setAttribute('aria-expanded', String(open));
-    button.replaceChildren(document.createTextNode(`${open ? 'Hide' : 'Show'} ${button.dataset.label} `));
+    button.replaceChildren(document.createTextNode(`${open ? 'Hide' : (button.dataset.closedVerb || 'Show')} ${button.dataset.label} `));
     const symbol = document.createElement('span'); symbol.setAttribute('aria-hidden', 'true');
     symbol.textContent = open ? '−' : '+'; button.append(symbol);
     content.hidden = !open;
@@ -26,5 +26,5 @@
     if (button) setOpen(button, true);
   });
   window.addEventListener('hashchange', revealHash);
-  revealHash();
+  // Initial loads, including bookmarked sections, stay collapsed.
 })();

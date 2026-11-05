@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Deblur4D reconstructs sharp dynamic 3D Gaussians from blurry RGB and differential measurements. Explore real-world comparisons, sensor and training ablations, and predicted motion.">
   <meta name="color-scheme" content="light">
-  <title>Deblur4D · From Blurry Frames to Dynamic 3D</title>
+  <title>Deblur4D · Feed-Forward 4D Reconstruction of High-Speed Scenes via Complementary Vision Sensors</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=sections-20261106">
-  <link rel="stylesheet" href="method.css?v=1">
-  <script src="sections.js?v=20261106" defer></script>
+  <link rel="stylesheet" href="styles.css?v=tracks-type-20261106">
+  <link rel="stylesheet" href="method.css?v=tracks-type-20261106">
+  <script src="sections.js?v=tracks-type-20261106" defer></script>
   <script src="player.js?v=sections-20261106" defer></script>
   <script src="outputs.js?v=head-detail-20261106" defer></script>
   <script src="method.js?v=20261106" defer></script>
@@ -26,7 +26,7 @@
   <main id="main">
     <section class="container hero" aria-labelledby="project-title">
       <p class="eyebrow">Complementary vision · Dynamic 3D reconstruction</p>
-      <h1 id="project-title"><span>Deblur4D</span><br>Feed-Forward 4D Reconstruction from<br class="desktop-break"> Blurry RGB and Complementary Vision</h1>
+      <h1 id="project-title"><span>Deblur4D</span><br>Feed-Forward 4D Reconstruction of High-Speed Scenes<br class="desktop-break"> via Complementary Vision Sensors</h1>
       <p class="hero-summary">From two blurry frames to a sharp, dynamic 3D scene.<br>Recovering camera poses, depth, and scene motion with synchronized RGB, TD, and SD measurements.</p>
       <div class="actions"><a class="button primary" href="#results">Explore results <span aria-hidden="true">→</span></a><a class="button" href="#method">How it works <span aria-hidden="true">↗</span></a></div>
     </section>
@@ -126,7 +126,7 @@
         </div>
         <p class="tour-footnote">Real inputs and predictions; schematic token animation.</p>
       </div>
-      <details class="original-method"><summary>View the complete architecture diagram <span>↗</span></summary><figure class="method-figure"><a href="assets/figures/pipeline.webp" target="_blank" rel="noopener" aria-label="Open the complete architecture diagram"><img src="assets/figures/pipeline.webp" width="2200" height="857" alt="Full Deblur4D architecture, including exposure-guided endpoint correction, SD-guided temporal queries, reconstruction heads, and the appearance shortcut." loading="lazy"></a></figure></details>
+      <div class="original-method"><button class="disclosure-toggle" type="button" aria-expanded="false" aria-controls="architecture-content" data-label="the complete architecture diagram" data-closed-verb="View">View the complete architecture diagram <span aria-hidden="true">+</span></button><div id="architecture-content" hidden><figure class="method-figure"><a href="assets/figures/pipeline.webp" target="_blank" rel="noopener" aria-label="Open the complete architecture diagram"><img src="assets/figures/pipeline.webp" width="2200" height="857" alt="Full Deblur4D architecture, including exposure-guided endpoint correction, SD-guided temporal queries, reconstruction heads, and the appearance shortcut." loading="lazy"></a></figure></div></div>
       <div class="training-note"><span class="number">Learning beyond labeled 3D data</span><p>Unlabeled video improves generalization to real captures.</p></div>
       </div>
     </section>
