@@ -5,13 +5,20 @@
     "kind": "motion_time0",
     "fps": 12,
     "frameCount": 13,
-    "width": 640,
+    "width": 1280,
     "height": 320,
+    "tileWidth": 640,
+    "tileHeight": 320,
+    "inputSequence": [
+      "RGB t0",
+      "SD t1..t11",
+      "RGB t12"
+    ],
     "mp4Codec": "avc1.640016",
-    "mediaVersion": "4d244a8584fe",
-    "video": "assets/media/outputs/fabric-motion_time0.mp4",
-    "webm": "assets/media/outputs/fabric-motion_time0.webm",
-    "poster": "assets/media/outputs/fabric-motion_time0.webp"
+    "mediaVersion": "1ff3508e799d",
+    "video": "assets/media/outputs/fabric-motion_time0-with-input.mp4",
+    "webm": "assets/media/outputs/fabric-motion_time0-with-input.webm",
+    "poster": "assets/media/outputs/fabric-motion_time0-with-input.webp"
   },
   {
     "id": "cushion-motion_time0",
@@ -19,13 +26,20 @@
     "kind": "motion_time0",
     "fps": 12,
     "frameCount": 13,
-    "width": 640,
+    "width": 1280,
     "height": 320,
+    "tileWidth": 640,
+    "tileHeight": 320,
+    "inputSequence": [
+      "RGB t0",
+      "SD t1..t11",
+      "RGB t12"
+    ],
     "mp4Codec": "avc1.640016",
-    "mediaVersion": "917a3f65037c",
-    "video": "assets/media/outputs/cushion-motion_time0.mp4",
-    "webm": "assets/media/outputs/cushion-motion_time0.webm",
-    "poster": "assets/media/outputs/cushion-motion_time0.webp"
+    "mediaVersion": "9d40fefe556b",
+    "video": "assets/media/outputs/cushion-motion_time0-with-input.mp4",
+    "webm": "assets/media/outputs/cushion-motion_time0-with-input.webm",
+    "poster": "assets/media/outputs/cushion-motion_time0-with-input.webp"
   },
   {
     "id": "pinwheel-depth",
@@ -33,13 +47,20 @@
     "kind": "depth",
     "fps": 12,
     "frameCount": 13,
-    "width": 640,
+    "width": 1280,
     "height": 320,
+    "tileWidth": 640,
+    "tileHeight": 320,
+    "inputSequence": [
+      "RGB t0",
+      "SD t1..t11",
+      "RGB t12"
+    ],
     "mp4Codec": "avc1.640016",
-    "mediaVersion": "c1021fa67d1d",
-    "video": "assets/media/outputs/pinwheel-depth.mp4",
-    "webm": "assets/media/outputs/pinwheel-depth.webm",
-    "poster": "assets/media/outputs/pinwheel-depth.webp"
+    "mediaVersion": "c3bffcc71e43",
+    "video": "assets/media/outputs/pinwheel-depth-with-input.mp4",
+    "webm": "assets/media/outputs/pinwheel-depth-with-input.webm",
+    "poster": "assets/media/outputs/pinwheel-depth-with-input.webp"
   },
   {
     "id": "spinning-disc-depth",
@@ -47,12 +68,19 @@
     "kind": "depth",
     "fps": 12,
     "frameCount": 13,
-    "width": 640,
+    "width": 1280,
     "height": 320,
+    "tileWidth": 640,
+    "tileHeight": 320,
+    "inputSequence": [
+      "RGB t0",
+      "SD t1..t11",
+      "RGB t12"
+    ],
     "mp4Codec": "avc1.640016",
-    "mediaVersion": "3d85c4da2dc0",
-    "video": "assets/media/outputs/spinning-disc-depth.mp4",
-    "webm": "assets/media/outputs/spinning-disc-depth.webm",
-    "poster": "assets/media/outputs/spinning-disc-depth.webp"
+    "mediaVersion": "4d8647915e18",
+    "video": "assets/media/outputs/spinning-disc-depth-with-input.mp4",
+    "webm": "assets/media/outputs/spinning-disc-depth-with-input.webm",
+    "poster": "assets/media/outputs/spinning-disc-depth-with-input.webp"
   }
 ]

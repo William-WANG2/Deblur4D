@@ -7,10 +7,10 @@
   <meta name="color-scheme" content="light">
   <title>Deblur4D · From Blurry Frames to Dynamic 3D</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=hover-magnifier-1">
+  <link rel="stylesheet" href="styles.css?v=outputs-input-20261105">
   <link rel="stylesheet" href="method.css?v=1">
   <script src="player.js?v=hover-magnifier-1" defer></script>
-  <script src="outputs.js?v=1" defer></script>
+  <script src="outputs.js?v=inputs-20261105" defer></script>
   <script src="method.js?v=1" defer></script>
 </head>
 <body>
@@ -33,7 +33,7 @@
     <section class="container section overview" id="overview" aria-labelledby="overview-title">
       <h2 id="overview-title">From blur to 4D.</h2>
       <figure class="teaser">
-        <a href="assets/figures/teaser.webp" target="_blank" rel="noopener" aria-label="Open the overview figure at full resolution"><img src="assets/figures/teaser.webp" width="2200" height="597" alt="Blurry RGB, spatial differences, and temporal differences are transformed into dynamic Gaussians, sharp images, depth, and 3D scene motion."></a>
+        <a href="assets/figures/teaser.webp?v=20261105" target="_blank" rel="noopener" aria-label="Open the overview figure at full resolution"><img src="assets/figures/teaser.webp?v=20261105" width="2400" height="666" alt="Blurry RGB and differential measurements produce dynamic Gaussians, predicted cameras, and temporally dense sharp renderings, depth, and 3D motion."></a>
         <figcaption>Two RGB exposures. High-speed differential measurements. One dynamic 3D reconstruction.</figcaption>
       </figure>
       <p class="overview-description">Motion blur and large inter-frame displacements make high-speed 4D reconstruction challenging. Deblur4D combines standard RGB frames with hardware-synchronized spatial differences (SD) and temporal differences (TD) from a Complementary Vision Sensor. A single feed-forward framework jointly recovers sharp appearance, camera poses, depth, and continuous scene motion.</p>
@@ -59,7 +59,7 @@
 
     <section class="container section outputs-section" id="geometry" aria-labelledby="outputs-title">
       <div class="section-heading"><div><p class="eyebrow">Beyond sharp appearance · Ours</p><h2 id="outputs-title">Motion and depth, recovered.</h2></div><span class="section-count">4 real captures</span></div>
-      <p class="section-intro">Scene motion from waving fabric and a moving cushion. Depth from a spinning pinwheel and disc. All four clips show Deblur4D predictions at their original playback speed.</p>
+      <p class="section-intro">Scene motion from waving fabric and a moving cushion. Depth from a spinning pinwheel and disc. Each pair shows synchronized inputs on the left and Deblur4D predictions on the right: the input sequence starts with RGB, follows intermediate SD measurements, and ends with RGB. Both sides retain the same 13 frames at 12 FPS.</p>
       <div id="output-galleries"><p class="loading-message" role="status">Loading motion and depth…</p></div>
       <noscript>Enable JavaScript to view the motion and depth players.</noscript>
     </section>

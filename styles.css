@@ -468,7 +468,16 @@ nav a:hover {
 .output-card figcaption {display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px;background:#f3f6f9;}
 .output-card h4 {margin:0;font-size:18px;font-weight:550;}
 .output-card figcaption span {font-size:12px;color:var(--blue);white-space:nowrap;}
-.output-card video {display:block;width:100%;height:auto;aspect-ratio:2/1;}
+.output-card video {display:block;width:100%;height:auto;aspect-ratio:4/1;}
+.output-pair-labels {display:grid;grid-template-columns:1fr 1fr;background:#1a2a3b;color:#e7edf5;font-size:12px;line-height:1.5;}
+.output-pair-labels span {padding:9px 10px;min-width:0;}
+.output-pair-labels span+span {border-left:1px solid #40536c;background:#233b60;color:#c8d9ff;}
+.output-controls {display:flex;align-items:center;gap:9px;padding:8px 10px;border-top:1px solid #334253;}
+.output-seek {flex:1;min-width:30px;width:100%;height:24px;accent-color:#8dadff;cursor:pointer;}
+.output-time {font-size:11px;color:#b8c7da;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.output-playback:fullscreen {display:flex;flex-direction:column;justify-content:center;padding:12px;background:#101c27;}
+.output-playback:fullscreen video {width:100%;max-height:calc(100dvh - 100px);object-fit:contain;}
+.output-playback:fullscreen .output-pair-labels {flex-shrink:0;}
 .output-error {padding:12px;color:#f5d79d;font-size:13px;}
 
 .view-tile.ours .view-name {

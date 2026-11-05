@@ -1,4 +1,4 @@
-/* Native Ours diagnostic clips, preserving their original colors and cadence. */
+/* One shared video keeps RGB/SD inputs and native Ours predictions in sync. */
 (() => {
   'use strict';
   async function initOutputs() {
@@ -27,18 +27,57 @@
           const title = document.createElement('h4'); title.textContent = clip.title;
           const label = document.createElement('span'); label.textContent = kind === 'motion_time0' ? 'Ours · motion_time0' : 'Ours · depth';
           caption.append(title, label);
+          const headings = document.createElement('div'); headings.className = 'output-pair-labels';
+          const inputLabel = document.createElement('span'); inputLabel.textContent = 'Input · RGB → SD → RGB';
+          const resultLabel = document.createElement('span'); resultLabel.textContent = kind === 'motion_time0' ? 'Ours · Scene motion' : 'Ours · Scene depth';
+          headings.append(inputLabel, resultLabel);
           const video = document.createElement('video');
-          video.controls = true; video.muted = true; video.loop = true; video.playsInline = true;
+          video.muted = true; video.loop = true; video.playsInline = true;
           video.preload = 'none'; video.poster = clip.poster;
           video.width = clip.width; video.height = clip.height;
-          video.setAttribute('aria-label', `${clip.title}: our ${kind} prediction`);
+          video.setAttribute('aria-label', `${clip.title}: synchronized RGB to SD to RGB inputs and our ${kind} prediction`);
           for (const [url, type] of [[clip.video, `video/mp4; codecs="${clip.mp4Codec}"`], [clip.webm, 'video/webm; codecs="vp9"']]) {
             const source = document.createElement('source'); source.src = `${url}?v=${clip.mediaVersion}`; source.type = type; video.append(source);
           }
           const message = document.createElement('p'); message.className = 'output-error'; message.hidden = true;
           message.setAttribute('role', 'status');
           video.addEventListener('error', () => {message.hidden = false; message.textContent = 'This clip could not load. Reload the page to retry.';});
-          card.append(caption, video, message); grid.append(card);
+          const playback = document.createElement('div'); playback.className = 'output-playback';
+          const controls = document.createElement('div'); controls.className = 'output-controls';
+          const play = document.createElement('button'); play.type = 'button'; play.className = 'player-button output-play';
+          const seek = document.createElement('input'); seek.type = 'range'; seek.className = 'output-seek';
+          seek.min = 0; seek.max = clip.frameCount - 1; seek.step = 1; seek.value = 0;
+          seek.setAttribute('aria-label', `Seek ${clip.title} input and prediction`);
+          const time = document.createElement('span'); time.className = 'output-time';
+          const fullscreen = document.createElement('button'); fullscreen.type = 'button'; fullscreen.className = 'player-button output-fullscreen';
+          fullscreen.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg>';
+          fullscreen.setAttribute('aria-label', `Fullscreen ${clip.title} input and prediction`);
+          fullscreen.hidden = !playback.requestFullscreen;
+          fullscreen.addEventListener('click', async () => {
+            try { if (document.fullscreenElement === playback) await document.exitFullscreen(); else await playback.requestFullscreen(); }
+            catch { message.hidden = false; message.textContent = 'Fullscreen is unavailable in this browser.'; }
+          });
+          const updateControls = () => {
+            play.textContent = video.paused ? '▶' : 'Ⅱ';
+            play.setAttribute('aria-label', `${video.paused ? 'Play' : 'Pause'} ${clip.title} input and prediction`);
+            const frame = Math.min(clip.frameCount - 1, Math.floor(video.currentTime * clip.fps + .0001));
+            seek.value = frame; time.textContent = `t = ${(frame / (clip.frameCount - 1)).toFixed(2)}`;
+            seek.setAttribute('aria-valuetext', `Frame ${frame + 1} of ${clip.frameCount}`);
+          };
+          play.addEventListener('click', () => {
+            if (video.paused) video.play().catch(() => {message.hidden = false; message.textContent = 'This clip could not play. Try again.';});
+            else video.pause();
+          });
+          seek.addEventListener('input', () => {video.preload = 'auto'; video.pause(); video.currentTime = (Number(seek.value) + .1) / clip.fps;});
+          for (const event of ['play', 'pause', 'timeupdate', 'seeked', 'loadedmetadata']) video.addEventListener(event, updateControls);
+          if (video.requestVideoFrameCallback) {
+            const onFrame = () => {updateControls(); video.requestVideoFrameCallback(onFrame);};
+            video.requestVideoFrameCallback(onFrame);
+          }
+          updateControls();
+          controls.append(play, seek, time, fullscreen);
+          playback.append(headings, video, controls);
+          card.append(caption, playback, message); grid.append(card);
           const state = {video, card, visible: false, wanted: !reduced.matches}; states.push(state);
           video.addEventListener('play', () => {state.wanted = true;});
           // Programmatic offscreen pauses do not erase the viewer's play intent.
