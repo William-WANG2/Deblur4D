@@ -40,47 +40,5 @@
     "video": "assets/media/outputs/cushion-motion_time0-with-input.mp4",
     "webm": "assets/media/outputs/cushion-motion_time0-with-input.webm",
     "poster": "assets/media/outputs/cushion-motion_time0-with-input.webp"
-  },
-  {
-    "id": "pinwheel-depth",
-    "title": "Spinning pinwheel",
-    "kind": "depth",
-    "fps": 12,
-    "frameCount": 13,
-    "width": 1280,
-    "height": 320,
-    "tileWidth": 640,
-    "tileHeight": 320,
-    "inputSequence": [
-      "RGB t0",
-      "SD t1..t11",
-      "RGB t12"
-    ],
-    "mp4Codec": "avc1.640016",
-    "mediaVersion": "c3bffcc71e43",
-    "video": "assets/media/outputs/pinwheel-depth-with-input.mp4",
-    "webm": "assets/media/outputs/pinwheel-depth-with-input.webm",
-    "poster": "assets/media/outputs/pinwheel-depth-with-input.webp"
-  },
-  {
-    "id": "spinning-disc-depth",
-    "title": "Spinning disc",
-    "kind": "depth",
-    "fps": 12,
-    "frameCount": 13,
-    "width": 1280,
-    "height": 320,
-    "tileWidth": 640,
-    "tileHeight": 320,
-    "inputSequence": [
-      "RGB t0",
-      "SD t1..t11",
-      "RGB t12"
-    ],
-    "mp4Codec": "avc1.640016",
-    "mediaVersion": "4d8647915e18",
-    "video": "assets/media/outputs/spinning-disc-depth-with-input.mp4",
-    "webm": "assets/media/outputs/spinning-disc-depth-with-input.webm",
-    "poster": "assets/media/outputs/spinning-disc-depth-with-input.webp"
   }
 ]

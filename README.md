@@ -2,14 +2,14 @@
 
 Static research website for Deblur4D: Feed-Forward 4D Reconstruction from Blurry RGB and Complementary Vision.
 
-The site includes nine synchronized eight-view comparisons, four synchronized input/ours motion/depth videos, and an interactive three-stage method walkthrough. Temporal clips retain their original 12 FPS cadence. Comparison playback alternates a pass with two camera orbits in 2.083 seconds and an uninterrupted pass.
+The page separates six synchronized eight-view comparisons, two ablation studies, and motion predictions. Comparison order: tossing a basketball, moving flowers, kicking, moving ball, moving cushion, and waving fabric.
 
-## Hosting
+The sensor ablation shows Swinging Minion with the four Figure 4 cases: blurry RGB input, RGB-only reconstruction, exposure TD/SD, and the addition of inter-frame SD. The training ablation compares labeled-only and additional unlabeled training on spinning-disc and pinwheel depth, alongside RGB → SD → RGB inputs. Depth retains the original relative color mapping within each prediction.
 
-GitHub Pages serves the root of the `main` branch. `.nojekyll` preserves the static assets without a Jekyll build. All required MP4/WebM files are included in this repository.
+Motion includes fabric/cushion displacement fields and disc/pinwheel predicted point tracks. Tracks come from native predicted depth and world-space scene flow projected into the rendered views, with short trails and stable point colors.
 
-The repository contains the public website only. Original datasets, checkpoints, render caches, research manuscripts, and local source records are excluded.
+All temporal clips retain 13 frames at 12 FPS. Comparison playback alternates a pass with two camera orbits in 2.083 seconds and an uninterrupted pass. Players include synchronized seeking, fullscreen, reduced-motion support, and H.264/VP9 media. The interactive method walkthrough explains the three reconstruction stages.
+
+GitHub Pages serves the root of the main branch; .nojekyll preserves the static assets. This repository contains only public website assets, excluding original datasets, checkpoints, research manuscripts, render caches, and private provenance.
 
 Page design inspired by [CoGenRec](https://cogenrec.github.io/).
-
-Motion/depth pairs show the start RGB, intermediate SD, and end RGB alongside the prediction, sharing 13 frames at 12 FPS and one set of playback controls.

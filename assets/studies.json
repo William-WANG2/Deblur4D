@@ -1,0 +1,106 @@
+[
+  {
+    "id": "minion-sensor",
+    "title": "Swinging Minion",
+    "kind": "sensor",
+    "fps": 12,
+    "frameCount": 13,
+    "width": 2560,
+    "height": 320,
+    "tileWidth": 640,
+    "tileHeight": 320,
+    "panels": [
+      "Input \u00b7 Blurry RGB",
+      "RGB only",
+      "RGB + Exposure TD/SD",
+      "RGB + Exposure TD/SD + Inter-frame SD"
+    ],
+    "mp4Codec": "avc1.64001f",
+    "mediaVersion": "0d177dfa730c",
+    "video": "assets/media/studies/minion-sensor.mp4",
+    "webm": "assets/media/studies/minion-sensor.webm",
+    "poster": "assets/media/studies/minion-sensor.webp"
+  },
+  {
+    "id": "spinning-disc-training",
+    "title": "Spinning disc",
+    "kind": "training",
+    "fps": 12,
+    "frameCount": 13,
+    "width": 1920,
+    "height": 320,
+    "tileWidth": 640,
+    "tileHeight": 320,
+    "panels": [
+      "Input \u00b7 RGB \u2192 SD \u2192 RGB",
+      "Depth \u00b7 Labeled only",
+      "Depth \u00b7 + Unlabeled training"
+    ],
+    "mp4Codec": "avc1.64001f",
+    "mediaVersion": "711bd7823cf0",
+    "video": "assets/media/studies/spinning-disc-training.mp4",
+    "webm": "assets/media/studies/spinning-disc-training.webm",
+    "poster": "assets/media/studies/spinning-disc-training.webp"
+  },
+  {
+    "id": "spinning-disc-tracks",
+    "title": "Spinning disc",
+    "kind": "tracks",
+    "fps": 12,
+    "frameCount": 13,
+    "width": 1280,
+    "height": 320,
+    "tileWidth": 640,
+    "tileHeight": 320,
+    "panels": [
+      "Rendered view",
+      "Predicted point tracks"
+    ],
+    "mp4Codec": "avc1.640016",
+    "mediaVersion": "adefad10e700",
+    "video": "assets/media/studies/spinning-disc-tracks.mp4",
+    "webm": "assets/media/studies/spinning-disc-tracks.webm",
+    "poster": "assets/media/studies/spinning-disc-tracks.webp"
+  },
+  {
+    "id": "pinwheel-training",
+    "title": "Spinning pinwheel",
+    "kind": "training",
+    "fps": 12,
+    "frameCount": 13,
+    "width": 1920,
+    "height": 320,
+    "tileWidth": 640,
+    "tileHeight": 320,
+    "panels": [
+      "Input \u00b7 RGB \u2192 SD \u2192 RGB",
+      "Depth \u00b7 Labeled only",
+      "Depth \u00b7 + Unlabeled training"
+    ],
+    "mp4Codec": "avc1.64001f",
+    "mediaVersion": "e401e31ef4b4",
+    "video": "assets/media/studies/pinwheel-training.mp4",
+    "webm": "assets/media/studies/pinwheel-training.webm",
+    "poster": "assets/media/studies/pinwheel-training.webp"
+  },
+  {
+    "id": "pinwheel-tracks",
+    "title": "Spinning pinwheel",
+    "kind": "tracks",
+    "fps": 12,
+    "frameCount": 13,
+    "width": 1280,
+    "height": 320,
+    "tileWidth": 640,
+    "tileHeight": 320,
+    "panels": [
+      "Rendered view",
+      "Predicted point tracks"
+    ],
+    "mp4Codec": "avc1.640016",
+    "mediaVersion": "fb648e4c7085",
+    "video": "assets/media/studies/pinwheel-tracks.mp4",
+    "webm": "assets/media/studies/pinwheel-tracks.webm",
+    "poster": "assets/media/studies/pinwheel-tracks.webp"
+  }
+]

@@ -352,7 +352,7 @@ async function init() {
   try {
     const response = await fetch('assets/scenes.json', {cache: 'no-store'});
     if (!response.ok) throw new Error('Scene manifest unavailable');
-    const scenes = await response.json();
+    const scenes = (await response.json()).filter(scene => scene.section !== 'ablation');
     list.replaceChildren();
     const players = scenes.map((scene, index) => new ScenePlayer(scene, index, list));
     const byCard = new Map(players.map(p => [p.card, p]));

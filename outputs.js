@@ -1,19 +1,23 @@
-/* One shared video keeps RGB/SD inputs and native Ours predictions in sync. */
+/* Each card uses one video timeline, including responsive multi-panel studies. */
 (() => {
   'use strict';
   async function initOutputs() {
     const root = document.querySelector('#output-galleries');
     if (!root) return;
     try {
-      const response = await fetch('assets/outputs.json', {cache: 'no-store'});
-      if (!response.ok) throw Error('Output manifest unavailable');
-      const clips = await response.json();
+      const responses = await Promise.all(['outputs', 'studies'].map(name => fetch(`assets/${name}.json`, {cache: 'no-store'})));
+      if (responses.some(response => !response.ok)) throw Error('Output manifest unavailable');
+      const clips = (await Promise.all(responses.map(response => response.json()))).flat();
       const reduced = matchMedia('(prefers-reduced-motion: reduce)');
       const states = [];
       root.replaceChildren();
-      for (const [kind, heading, description] of [
-        ['motion_time0', 'Motion', 'Displacements toward t₀ across source frames. Red, green, and blue encode the normalized X, Y, and Z components.'],
-        ['depth', 'Depth', 'Dense geometry across the captured sequence, shown with the original depth color mapping.'],
+      const ablationRoot = document.querySelector('#ablation-galleries');
+      ablationRoot.replaceChildren();
+      for (const [kind, heading, description, destination] of [
+        ['sensor', '01 · CVS sensor measurements', 'Four cases from Figure 4, shown on Swinging Minion: blurry input, RGB-only reconstruction, exposure measurements, and the addition of inter-frame SD. Reconstruction variants use labeled-only training.', ablationRoot],
+        ['training', '02 · Learning from unlabeled captures', 'Depth with labeled-only training versus training with additional unlabeled captures, alongside synchronized RGB → SD → RGB inputs. Original colors show relative depth within each prediction, not a shared metric depth scale.', ablationRoot],
+        ['motion_time0', 'Motion', 'Displacements toward t₀ across source frames. Red, green, and blue encode the normalized X, Y, and Z components.', root],
+        ['tracks', 'Point tracks', 'Predicted 3D motion projected into each rendered view. Colors identify the same points over time; short trails show their recent paths.', root],
       ]) {
         const group = document.createElement('div');
         group.className = `output-group ${kind}`;
@@ -25,7 +29,7 @@
           const card = document.createElement('figure'); card.className = 'output-card'; card.dataset.outputId = clip.id;
           const caption = document.createElement('figcaption');
           const title = document.createElement('h4'); title.textContent = clip.title;
-          const label = document.createElement('span'); label.textContent = heading;
+          const label = document.createElement('span'); label.textContent = kind === 'sensor' ? 'Sensor ablation' : kind === 'training' ? 'Training ablation' : heading;
           caption.append(title, label);
           const headings = document.createElement('div'); headings.className = 'output-pair-labels';
           const inputLabel = document.createElement('span'); inputLabel.textContent = 'Input · RGB → SD → RGB';
@@ -35,7 +39,30 @@
           video.muted = true; video.loop = true; video.playsInline = true;
           video.preload = 'none'; video.poster = clip.poster;
           video.width = clip.width; video.height = clip.height;
-          video.setAttribute('aria-label', `${clip.title}: synchronized RGB to SD to RGB inputs and our ${kind} prediction`);
+          video.setAttribute('aria-label', `${clip.title}: ${clip.panels ? clip.panels.join(', ') : 'synchronized RGB to SD to RGB inputs and motion prediction'}`);
+          let drawPanels = () => {};
+          let panelLayout;
+          if (clip.panels) {
+            card.classList.add('study-card');
+            card.dataset.studyKind = kind;
+            video.classList.add('study-atlas');
+            video.tabIndex = -1; video.setAttribute('aria-hidden', 'true');
+            headings.hidden = true;
+            panelLayout = document.createElement('div'); panelLayout.className = `study-panels study-panels-${clip.panels.length}`;
+            const canvases = clip.panels.map((name, index) => {
+              const panel = document.createElement('div'); panel.className = 'study-panel';
+              const title = document.createElement('div'); title.className = 'study-panel-label'; title.textContent = name;
+              const canvas = document.createElement('canvas'); canvas.width = clip.tileWidth; canvas.height = clip.tileHeight;
+              canvas.setAttribute('role', 'img'); canvas.setAttribute('aria-label', `${clip.title}: ${name}`);
+              panel.append(title, canvas); panelLayout.append(panel);
+              return {ctx: canvas.getContext('2d', {alpha: false}), index};
+            });
+            const draw = source => canvases.forEach(({ctx, index}) => ctx.drawImage(source,
+              index * clip.tileWidth, 0, clip.tileWidth, clip.tileHeight, 0, 0, clip.tileWidth, clip.tileHeight));
+            drawPanels = () => {if (video.readyState >= 2) draw(video);};
+            const poster = new Image();
+            poster.onload = () => {if (video.readyState < 2) draw(poster);}; poster.src = clip.poster;
+          }
           for (const [url, type] of [[clip.video, `video/mp4; codecs="${clip.mp4Codec}"`], [clip.webm, 'video/webm; codecs="vp9"']]) {
             const source = document.createElement('source'); source.src = `${url}?v=${clip.mediaVersion}`; source.type = type; video.append(source);
           }
@@ -60,7 +87,7 @@
           const updateControls = () => {
             play.textContent = video.paused ? '▶' : 'Ⅱ';
             play.setAttribute('aria-label', `${video.paused ? 'Play' : 'Pause'} ${clip.title} input and prediction`);
-            const frame = Math.min(clip.frameCount - 1, Math.floor(video.currentTime * clip.fps + .0001));
+            const frame = video.readyState < 2 ? 6 : Math.min(clip.frameCount - 1, Math.floor(video.currentTime * clip.fps + .0001));
             seek.value = frame; time.textContent = `t = ${(frame / (clip.frameCount - 1)).toFixed(2)}`;
             seek.setAttribute('aria-valuetext', `Frame ${frame + 1} of ${clip.frameCount}`);
           };
@@ -69,21 +96,23 @@
             else video.pause();
           });
           seek.addEventListener('input', () => {video.preload = 'auto'; video.pause(); video.currentTime = (Number(seek.value) + .1) / clip.fps;});
-          for (const event of ['play', 'pause', 'timeupdate', 'seeked', 'loadedmetadata']) video.addEventListener(event, updateControls);
+          for (const event of ['play', 'pause', 'timeupdate', 'seeked', 'loadeddata']) video.addEventListener(event, () => {updateControls(); drawPanels();});
           if (video.requestVideoFrameCallback) {
-            const onFrame = () => {updateControls(); video.requestVideoFrameCallback(onFrame);};
+            const onFrame = () => {updateControls(); drawPanels(); video.requestVideoFrameCallback(onFrame);};
             video.requestVideoFrameCallback(onFrame);
           }
           updateControls();
           controls.append(play, seek, time, fullscreen);
-          playback.append(headings, video, controls);
+          playback.append(headings, video);
+          if (panelLayout) playback.append(panelLayout);
+          playback.append(controls);
           card.append(caption, playback, message); grid.append(card);
           const state = {video, card, visible: false, wanted: !reduced.matches}; states.push(state);
           video.addEventListener('play', () => {state.wanted = true;});
           // Programmatic offscreen pauses do not erase the viewer's play intent.
           video.addEventListener('pause', () => {if (state.visible && !document.hidden) state.wanted = false;});
         }
-        root.append(group);
+        destination.append(group);
       }
       const resume = state => {
         if (state.visible && !document.hidden && state.wanted) state.video.play().catch(() => {});
@@ -97,7 +126,8 @@
       document.addEventListener('visibilitychange', () => states.forEach(resume));
       reduced.addEventListener('change', event => {if (event.matches) states.forEach(state => {state.wanted = false; state.video.pause();});});
     } catch {
-      root.textContent = 'The motion and depth clips could not be loaded. Reload the page to retry.';
+      root.textContent = 'The motion clips could not be loaded. Reload the page to retry.';
+      document.querySelector('#ablation-galleries').textContent = 'The ablation clips could not be loaded. Reload the page to retry.';
     }
   }
   initOutputs();

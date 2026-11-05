@@ -1,7 +1,7 @@
 [
   {
-    "id": "ball",
-    "title": "Moving ball",
+    "id": "basketball",
+    "title": "Tossing a basketball",
     "fps": 60,
     "sourceFps": 12,
     "sourceFrameStride": 5,
@@ -10,7 +10,7 @@
     "orbitLapFrames": 62.0,
     "sourceFrames": 13,
     "frameCount": 255,
-    "mediaVersion": "ca978777da99",
+    "mediaVersion": "df136ae37558",
     "plainPassStartFrame": 190,
     "playbackPasses": [
       "with-orbit",
@@ -20,11 +20,11 @@
     "orbitStartFrame": 35,
     "orbitEndFrame": 160,
     "orbitRadiusDegrees": {
-      "ours": 0.10119739497692355,
-      "ufo_rgb": 0.12150000000000001,
-      "tmcdeblur_ufo": 0.12150000000000001,
-      "bim_vfi_vggt_movies": 0.20000284771990492,
-      "igfnet_vggt_movies": 0.1452140331470831
+      "ours": 0.23131875000000002,
+      "ufo_rgb": 0.6,
+      "tmcdeblur_ufo": 0.36502991121401707,
+      "bim_vfi_vggt_movies": 0.705,
+      "igfnet_vggt_movies": 0.2535
     },
     "tileWidth": 640,
     "tileHeight": 320,
@@ -38,9 +38,10 @@
       "bim_vfi_vggt_movies",
       "igfnet_vggt_movies"
     ],
-    "video": "assets/media/ball/comparison-two-orbits-alternating.mp4",
-    "webm": "assets/media/ball/comparison-two-orbits-alternating.webm",
-    "poster": "assets/media/ball/poster.webp"
+    "video": "assets/media/basketball/comparison-two-orbits-alternating.mp4",
+    "webm": "assets/media/basketball/comparison-two-orbits-alternating.webm",
+    "poster": "assets/media/basketball/poster.webp",
+    "section": "comparison"
   },
   {
     "id": "flowers",
@@ -83,7 +84,8 @@
     ],
     "video": "assets/media/flowers/comparison-two-orbits-alternating.mp4",
     "webm": "assets/media/flowers/comparison-two-orbits-alternating.webm",
-    "poster": "assets/media/flowers/poster.webp"
+    "poster": "assets/media/flowers/poster.webp",
+    "section": "comparison"
   },
   {
     "id": "kick",
@@ -126,11 +128,12 @@
     ],
     "video": "assets/media/kick/comparison-two-orbits-alternating.mp4",
     "webm": "assets/media/kick/comparison-two-orbits-alternating.webm",
-    "poster": "assets/media/kick/poster.webp"
+    "poster": "assets/media/kick/poster.webp",
+    "section": "comparison"
   },
   {
-    "id": "basketball",
-    "title": "Tossing a basketball",
+    "id": "ball",
+    "title": "Moving ball",
     "fps": 60,
     "sourceFps": 12,
     "sourceFrameStride": 5,
@@ -139,7 +142,7 @@
     "orbitLapFrames": 62.0,
     "sourceFrames": 13,
     "frameCount": 255,
-    "mediaVersion": "df136ae37558",
+    "mediaVersion": "ca978777da99",
     "plainPassStartFrame": 190,
     "playbackPasses": [
       "with-orbit",
@@ -149,11 +152,11 @@
     "orbitStartFrame": 35,
     "orbitEndFrame": 160,
     "orbitRadiusDegrees": {
-      "ours": 0.23131875000000002,
-      "ufo_rgb": 0.6,
-      "tmcdeblur_ufo": 0.36502991121401707,
-      "bim_vfi_vggt_movies": 0.705,
-      "igfnet_vggt_movies": 0.2535
+      "ours": 0.10119739497692355,
+      "ufo_rgb": 0.12150000000000001,
+      "tmcdeblur_ufo": 0.12150000000000001,
+      "bim_vfi_vggt_movies": 0.20000284771990492,
+      "igfnet_vggt_movies": 0.1452140331470831
     },
     "tileWidth": 640,
     "tileHeight": 320,
@@ -167,9 +170,10 @@
       "bim_vfi_vggt_movies",
       "igfnet_vggt_movies"
     ],
-    "video": "assets/media/basketball/comparison-two-orbits-alternating.mp4",
-    "webm": "assets/media/basketball/comparison-two-orbits-alternating.webm",
-    "poster": "assets/media/basketball/poster.webp"
+    "video": "assets/media/ball/comparison-two-orbits-alternating.mp4",
+    "webm": "assets/media/ball/comparison-two-orbits-alternating.webm",
+    "poster": "assets/media/ball/poster.webp",
+    "section": "comparison"
   },
   {
     "id": "cushion",
@@ -212,50 +216,8 @@
     ],
     "video": "assets/media/cushion/comparison-two-orbits-alternating.mp4",
     "webm": "assets/media/cushion/comparison-two-orbits-alternating.webm",
-    "poster": "assets/media/cushion/poster.webp"
-  },
-  {
-    "id": "spinning-disc",
-    "title": "Spinning disc",
-    "fps": 60,
-    "sourceFps": 12,
-    "sourceFrameStride": 5,
-    "orbitLoops": 2,
-    "orbitFrames": 125,
-    "orbitLapFrames": 62.0,
-    "sourceFrames": 13,
-    "frameCount": 255,
-    "mediaVersion": "aae7bd1d4370",
-    "plainPassStartFrame": 190,
-    "playbackPasses": [
-      "with-orbit",
-      "without-orbit"
-    ],
-    "mp4Codec": "avc1.64002a",
-    "orbitStartFrame": 35,
-    "orbitEndFrame": 160,
-    "orbitRadiusDegrees": {
-      "ours": 0.2535,
-      "ufo_rgb": 1.2445147292349565,
-      "tmcdeblur_ufo": 0.6,
-      "bim_vfi_vggt_movies": 0.39,
-      "igfnet_vggt_movies": 0.6
-    },
-    "tileWidth": 640,
-    "tileHeight": 320,
-    "tileOrder": [
-      "rgb",
-      "td",
-      "ufo_rgb",
-      "tmcdeblur_ufo",
-      "sd",
-      "ours",
-      "bim_vfi_vggt_movies",
-      "igfnet_vggt_movies"
-    ],
-    "video": "assets/media/spinning-disc/comparison-two-orbits-alternating.mp4",
-    "webm": "assets/media/spinning-disc/comparison-two-orbits-alternating.webm",
-    "poster": "assets/media/spinning-disc/poster.webp"
+    "poster": "assets/media/cushion/poster.webp",
+    "section": "comparison"
   },
   {
     "id": "fabric",
@@ -298,92 +260,7 @@
     ],
     "video": "assets/media/fabric/comparison-two-orbits-alternating.mp4",
     "webm": "assets/media/fabric/comparison-two-orbits-alternating.webm",
-    "poster": "assets/media/fabric/poster.webp"
-  },
-  {
-    "id": "pinwheel",
-    "title": "Spinning pinwheel",
-    "fps": 60,
-    "sourceFps": 12,
-    "sourceFrameStride": 5,
-    "orbitLoops": 2,
-    "orbitFrames": 125,
-    "orbitLapFrames": 62.0,
-    "sourceFrames": 13,
-    "frameCount": 255,
-    "mediaVersion": "d6926bc1fdee",
-    "plainPassStartFrame": 190,
-    "playbackPasses": [
-      "with-orbit",
-      "without-orbit"
-    ],
-    "mp4Codec": "avc1.64002a",
-    "orbitStartFrame": 35,
-    "orbitEndFrame": 160,
-    "orbitRadiusDegrees": {
-      "ours": 0.164775,
-      "ufo_rgb": 0.27,
-      "tmcdeblur_ufo": 0.27,
-      "bim_vfi_vggt_movies": 0.2535,
-      "igfnet_vggt_movies": 0.2535
-    },
-    "tileWidth": 640,
-    "tileHeight": 320,
-    "tileOrder": [
-      "rgb",
-      "td",
-      "ufo_rgb",
-      "tmcdeblur_ufo",
-      "sd",
-      "ours",
-      "bim_vfi_vggt_movies",
-      "igfnet_vggt_movies"
-    ],
-    "video": "assets/media/pinwheel/comparison-two-orbits-alternating.mp4",
-    "webm": "assets/media/pinwheel/comparison-two-orbits-alternating.webm",
-    "poster": "assets/media/pinwheel/poster.webp"
-  },
-  {
-    "id": "minion",
-    "title": "Swinging Minion",
-    "fps": 60,
-    "sourceFps": 12,
-    "sourceFrameStride": 5,
-    "orbitLoops": 2,
-    "orbitFrames": 125,
-    "orbitLapFrames": 62.0,
-    "sourceFrames": 13,
-    "frameCount": 255,
-    "mediaVersion": "23d0a3fb0f4e",
-    "plainPassStartFrame": 190,
-    "playbackPasses": [
-      "with-orbit",
-      "without-orbit"
-    ],
-    "mp4Codec": "avc1.64002a",
-    "orbitStartFrame": 35,
-    "orbitEndFrame": 160,
-    "orbitRadiusDegrees": {
-      "ours": 0.39,
-      "ufo_rgb": 1.0447796769571454,
-      "tmcdeblur_ufo": 0.6,
-      "bim_vfi_vggt_movies": 0.6,
-      "igfnet_vggt_movies": 0.429375
-    },
-    "tileWidth": 640,
-    "tileHeight": 320,
-    "tileOrder": [
-      "rgb",
-      "td",
-      "ufo_rgb",
-      "tmcdeblur_ufo",
-      "sd",
-      "ours",
-      "bim_vfi_vggt_movies",
-      "igfnet_vggt_movies"
-    ],
-    "video": "assets/media/minion/comparison-two-orbits-alternating.mp4",
-    "webm": "assets/media/minion/comparison-two-orbits-alternating.webm",
-    "poster": "assets/media/minion/poster.webp"
+    "poster": "assets/media/fabric/poster.webp",
+    "section": "comparison"
   }
 ]
