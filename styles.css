@@ -158,6 +158,7 @@ nav a:hover {
 
 .hero h1 {
   max-width:1090px;
+  text-wrap:balance;
   margin:16px auto 0;
   font-size:clamp(28px,3.3vw,43px);
   line-height:1.25;
@@ -165,7 +166,7 @@ nav a:hover {
   letter-spacing:-.9px;
 }
 
-.hero h1>span {
+.hero h1>.project-name {
   font-size:1.23em;
   color:var(--blue);
   display:inline-block;
@@ -852,7 +853,7 @@ footer a {
     font-size:29px;
     letter-spacing:-.65px;
   }
-  .hero h1>span {
+  .hero h1>.project-name {
     font-size:1.28em;
   }
   .eyebrow {
@@ -1047,4 +1048,8 @@ footer a {
   :root {--panel-label-size:12px;--scene-title-size:18px;--metadata-size:10px;--control-text-size:10px;}
   .comparison-player:fullscreen,.output-playback:fullscreen {--panel-label-size:12px;}
   .output-pair-labels span {padding:8px;min-height:64px;}
+}
+
+.hero h1>.title-phrase {
+  white-space:nowrap;
 }

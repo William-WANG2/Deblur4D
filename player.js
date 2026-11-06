@@ -10,7 +10,7 @@ const ICONS = {
 const svg = name => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[name]}</svg>`;
 const LABELS = {
   rgb: ['RGB', 'Blurry input'], td: ['TD', 'Temporal differences'],
-  sd: ['SD', 'Spatial differences'], ours: ['Ours', 'Deblur4D'],
+  sd: ['SD', 'Spatial differences'], ours: ['Ours', '4DCVS'],
   ufo_rgb: ['UFO-4D', 'Blurry RGB'], tmcdeblur_ufo: ['STD-Deblur + UFO-4D', ''],
   bim_vfi_vggt_movies: ['BiM-VFI + VGGT-Ω + MoVieS', ''],
   igfnet_vggt_movies: ['IGFNet + VGGT-Ω + MoVieS', ''],
@@ -138,7 +138,7 @@ class ScenePlayer {
     root.append(video);
     const layout = element('div', 'comparison-layout');
     for (const [groupName, keys] of [
-      ['Sensor inputs and Deblur4D', ['rgb', 'td', 'sd', 'ours']],
+      ['Sensor inputs and 4DCVS', ['rgb', 'td', 'sd', 'ours']],
       ['Baseline reconstructions', ['ufo_rgb', 'tmcdeblur_ufo', 'bim_vfi_vggt_movies', 'igfnet_vggt_movies']],
     ]) {
       const group = element('div', 'view-group');

@@ -1,6 +1,6 @@
-# Deblur4D project website
+# 4DCVS project website
 
-Static research website for Deblur4D: Feed-Forward 4D Reconstruction of High-Speed Scenes via Complementary Vision Sensors.
+Static research website for 4DCVS: Feed-Forward 4D Reconstruction of High-Speed Scenes via Complementary Vision Sensors.
 
 The page separates six synchronized eight-view comparisons, two ablation studies, and motion predictions. Comparison order: tossing a basketball, moving flowers, kicking, moving ball, moving cushion, and waving fabric.
 

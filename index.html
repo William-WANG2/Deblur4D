@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Deblur4D reconstructs sharp dynamic 3D Gaussians from blurry RGB and differential measurements. Explore real-world comparisons, sensor and training ablations, and predicted motion.">
+  <meta name="description" content="4DCVS reconstructs sharp dynamic 3D Gaussians from blurry RGB and differential measurements. Explore real-world comparisons, sensor and training ablations, and predicted motion.">
   <meta name="color-scheme" content="light">
-  <title>Deblur4D · Feed-Forward 4D Reconstruction of High-Speed Scenes via Complementary Vision Sensors</title>
+  <title>4DCVS · Feed-Forward 4D Reconstruction of High-Speed Scenes via Complementary Vision Sensors</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=tracks-type-20261106">
+  <link rel="stylesheet" href="styles.css?v=4dcvs-title-20261106">
   <link rel="stylesheet" href="method.css?v=tracks-type-20261106">
   <script src="sections.js?v=tracks-type-20261106" defer></script>
-  <script src="player.js?v=sections-20261106" defer></script>
+  <script src="player.js?v=4dcvs-title-20261106" defer></script>
   <script src="outputs.js?v=head-detail-20261106" defer></script>
   <script src="method.js?v=20261106" defer></script>
 </head>
@@ -18,7 +18,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="topbar">
     <div class="container topbar-inner">
-      <a class="brand" href="#main" aria-label="Deblur4D home"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="m15 2 12 7v12l-12 7-12-7V9Z M3 9l12 7 12-7 M15 16v12"/></svg>Deblur4D</a>
+      <a class="brand" href="#main" aria-label="4DCVS home"><svg viewBox="0 0 30 30" aria-hidden="true"><path d="m15 2 12 7v12l-12 7-12-7V9Z M3 9l12 7 12-7 M15 16v12"/></svg>4DCVS</a>
       <nav aria-label="Main navigation"><a href="#results">Comparison</a><a href="#ablation">Ablation</a><a href="#geometry">Motion</a><a href="#method">Method</a></nav>
     </div>
   </header>
@@ -26,7 +26,7 @@
   <main id="main">
     <section class="container hero" aria-labelledby="project-title">
       <p class="eyebrow">Complementary vision · Dynamic 3D reconstruction</p>
-      <h1 id="project-title"><span>Deblur4D</span><br>Feed-Forward 4D Reconstruction of High-Speed Scenes<br class="desktop-break"> via Complementary Vision Sensors</h1>
+      <h1 id="project-title"><span class="project-name">4DCVS</span><br>Feed-Forward 4D Reconstruction of <span class="title-phrase">High-Speed Scenes</span> via Complementary Vision Sensors</h1>
       <p class="hero-summary">From two blurry frames to a sharp, dynamic 3D scene.<br>Recovering camera poses, depth, and scene motion with synchronized RGB, TD, and SD measurements.</p>
       <div class="actions"><a class="button primary" href="#results">Explore results <span aria-hidden="true">→</span></a><a class="button" href="#method">How it works <span aria-hidden="true">↗</span></a></div>
     </section>
@@ -83,7 +83,7 @@
       <p class="section-intro">Deblur endpoints → interpolate visual tokens → reconstruct 4D.</p>
       <button type="button" class="section-toggle" aria-expanded="false" aria-controls="method-content" data-label="method">Show method <span aria-hidden="true">+</span></button>
       <div class="section-content" id="method-content" hidden>
-      <div class="method-tour" id="method-tour" data-stage="0" aria-label="Interactive three-stage Deblur4D walkthrough">
+      <div class="method-tour" id="method-tour" data-stage="0" aria-label="Interactive three-stage 4DCVS walkthrough">
         <div class="tour-heading">
           <div><p class="tour-eyebrow">Inside a single feed-forward pass</p><h3>Two blurry frames.<br><span>An entire moving world.</span></h3></div>
           <div class="tour-live"><span></span><span id="tour-state">Animated walkthrough</span></div>
@@ -126,11 +126,11 @@
         </div>
         <p class="tour-footnote">Real inputs and predictions; schematic token animation.</p>
       </div>
-      <div class="original-method"><button class="disclosure-toggle" type="button" aria-expanded="false" aria-controls="architecture-content" data-label="the complete architecture diagram" data-closed-verb="View">View the complete architecture diagram <span aria-hidden="true">+</span></button><div id="architecture-content" hidden><figure class="method-figure"><a href="assets/figures/pipeline.webp" target="_blank" rel="noopener" aria-label="Open the complete architecture diagram"><img src="assets/figures/pipeline.webp" width="2200" height="857" alt="Full Deblur4D architecture, including exposure-guided endpoint correction, SD-guided temporal queries, reconstruction heads, and the appearance shortcut." loading="lazy"></a></figure></div></div>
+      <div class="original-method"><button class="disclosure-toggle" type="button" aria-expanded="false" aria-controls="architecture-content" data-label="the complete architecture diagram" data-closed-verb="View">View the complete architecture diagram <span aria-hidden="true">+</span></button><div id="architecture-content" hidden><figure class="method-figure"><a href="assets/figures/pipeline.webp" target="_blank" rel="noopener" aria-label="Open the complete architecture diagram"><img src="assets/figures/pipeline.webp" width="2200" height="857" alt="Full 4DCVS architecture, including exposure-guided endpoint correction, SD-guided temporal queries, reconstruction heads, and the appearance shortcut." loading="lazy"></a></figure></div></div>
       <div class="training-note"><span class="number">Learning beyond labeled 3D data</span><p>Unlabeled video improves generalization to real captures.</p></div>
       </div>
     </section>
   </main>
-  <footer><div class="container footer-inner"><span class="footer-brand">Deblur4D <span>Complementary vision for dynamic 3D.</span></span><span>Page design inspired by <a href="https://cogenrec.github.io/" target="_blank" rel="noopener">CoGenRec ↗</a></span></div></footer>
+  <footer><div class="container footer-inner"><span class="footer-brand">4DCVS <span>Complementary vision for dynamic 3D.</span></span><span>Page design inspired by <a href="https://cogenrec.github.io/" target="_blank" rel="noopener">CoGenRec ↗</a></span></div></footer>
 </body>
 </html>
